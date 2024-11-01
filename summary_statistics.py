@@ -25,18 +25,15 @@ print()
 print(data[['state_code', 'candidate']].value_counts())
 
 # Plot 1
-sns.displot(data = data, x = 'state_code', hue = 'candidate', kde = True, aspect = 3)
+sns.displot(data = data, x = 'state_code', hue = 'candidate', kde = True, aspect = 3, height = 10)
 plt.xlabel('State Code')
-plt.title('Distribution of Tweets by State and Candidate')
-plt.show()
-
+plt.title('Distribution of Tweets by State and Candidate', fontsize = 18)
 plt.savefig(folder_path + '/distr_of_tweets_by_state_and_candidate.png')
 
 # Plot 2
 sns.displot(data = data, x = 'created_at', hue = 'candidate', kde = True, aspect = 3)
 plt.xlabel('Date')
-plt.title('Distribution of Tweets by Date and Candidate')
-plt.show()
+plt.title('Distribution of Tweets by Date and Candidate', fontsize = 16)
 plt.savefig(folder_path + '/distr_of_tweets_by_date_and_candidate.png')
 
 
