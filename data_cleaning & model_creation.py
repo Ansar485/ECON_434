@@ -9,6 +9,7 @@ import ast
 #from nltk.corpus import opinion_lexicon
 pd.set_option('display.max_columns', None)
 
+# Data cleaning process
 """
 # Reading the datasets
 trump = pd.read_csv('data/hashtag_donaldtrump.csv',
@@ -26,7 +27,8 @@ data = pd.concat([trump, biden], ignore_index = True) # concatenating the datafr
 
 # If you want to save the results before proceeding
 """data.to_csv('data_cleaned.csv', encoding='utf-8', header=True)"""
-data = pd.read_csv('data_cleaned.csv')
+
+data = pd.read_csv('data_cleaned.csv') # If you want to start with the cleaned dataset right away
 data['clean_text'] = data['clean_text'].apply(ast.literal_eval)
 
 model = Word2Vec(data['clean_text'],
