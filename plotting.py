@@ -3,11 +3,9 @@ import pandas as pd
 import plotly.express as px
 import plotly
 from pandas import read_csv
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
 import seaborn as sns
 import os
-#pd.set_option('display.max_columns', None)
+pd.set_option('display.max_columns', None)
 
 # Reading the data
 data_sentiments = pd.read_csv('data_sentiments.csv', parse_dates = ['created_at'])
@@ -17,6 +15,7 @@ data_general = read_csv('data_general.csv', parse_dates = ['created_at'])
 data_general['created_at'] = data_general['created_at'].dt.date
 
 data_by_states = read_csv('data_by_states.csv')
+
 
 #Plotting density plots for Trump and Biden
 fig, ax = plt.subplots(1, 1, figsize=(12, 6))
@@ -40,7 +39,7 @@ if not os.path.exists("images"):
     os.makedirs("images")
 
 plt.savefig('images/Density Plots.png')
-plt.clf()
+plt.show()
 
 #Plotting sentiment scores by candidates over time
 plt.figure(figsize = (10, 6))
@@ -59,6 +58,7 @@ plt.xticks(rotation = 45)  # rotating x-axis labels for better readability
 # Showing the plot
 plt.tight_layout()
 plt.savefig('images/Sentiment Scores by Candidate Over Time.png')
+plt.show()
 
 # Plotting Sentiment Scores by States for Trump and Biden
 fig_trump = px.choropleth(data_by_states,
@@ -130,8 +130,7 @@ fig_results = px.choropleth(data_by_states,
 plotly.offline.plot(fig_results, filename = 'images/Prediction Results by State.html')
 
 # Calculating Error Rate
-total = len(data_by_states['prediction_correct'])
-incorrect = total - data_by_states['prediction_correct'].sum()
-err_rate = incorrect/total
-print(f'The error rate is: {round(err_rate * 100, 2)}%')
-
+total_predictions = len(data_by_states['prediction'])
+correct_predictions = data_by_states['prediction'].value_counts().get('Correct', 0)
+accuracy_rate = correct_predictions / total_predictions
+print(f'The accuracy of the model is: {round(accuracy_rate * 100, 2)}%')

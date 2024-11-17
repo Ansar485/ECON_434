@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import gensim
 from langdetect import detect
 import gensim
 from langdetect.lang_detect_exception import LangDetectException

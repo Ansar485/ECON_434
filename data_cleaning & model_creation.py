@@ -36,6 +36,10 @@ model = Word2Vec(data['clean_text'],
                  window = 10,
                  min_count = 1,
                  workers = multiprocess.cpu_count())
+
+# Save the model
+model.save("word2vec_model.model")
+
 data['vector'] = data['clean_text'].apply(lambda x: document_vector(x, model))
 
 # Download opinion lexicon (maybe will use this later)
@@ -109,5 +113,3 @@ data_by_states = data_by_states[
 data.to_csv('data_sentiments.csv', encoding='utf-8', header=True)
 data_general.to_csv('data_general.csv', encoding='utf-8', header=True, index = False)
 data_by_states.to_csv('data_by_states.csv', encoding='utf-8', header=True, index = False)
-
-
