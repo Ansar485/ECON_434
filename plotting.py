@@ -128,9 +128,3 @@ fig_results = px.choropleth(data_by_states,
                             title='US 2020 Elections: Correct Predictions by State')
 
 plotly.offline.plot(fig_results, filename = 'images/Prediction Results by State.html')
-
-# Calculating Error Rate
-total_predictions = len(data_by_states['prediction'])
-correct_predictions = data_by_states['prediction'].value_counts().get('Correct', 0)
-accuracy_rate = correct_predictions / total_predictions
-print(f'The accuracy of the model is: {round(accuracy_rate * 100, 2)}%')
